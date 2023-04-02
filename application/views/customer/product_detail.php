@@ -18,8 +18,42 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <h1 class="h3 mb-4 text-gray-800">Detail Produk</h1>
+                    <!-- Card Product -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <a href="<?= base_url('customer/product/' . $product['id']) ?>">
+                                        <h6 class="m-0 font-weight-bold text-primary"><?= $product['product_name'] ?></h6>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <form class="product" method="post" action="<?= base_url('customer/order') ?>">
+                                        <img src="<?= base_url('uploads/product/' . $product['image']) ?>" class="w-100" />
+                                        <h6 class="mt-2">Harga : <?= $product['price'] ?></h6>
+                                        <h6 class="mt-2">Penjual : <?= $product['admin_name'] ?></h6>
+                                        <input type="hidden" name="product" value="<?= $product['id'] ?>">
+                                        <?php if ($alreadyOrder) : ?>
+                                            <button type="submit" class="btn btn-danger btn-icon-split" name="order" value="delete">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span class="text">Hapus dari keranjang</span>
+                                            </button>
+                                        <?php else : ?>
+                                            <button type="submit" class="btn btn-success btn-icon-split" name="order" value="insert">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-plus"></i>
+                                                </span>
+                                                <span class="text">Keranjang</span>
+                                            </button>
+                                        <?php endif; ?>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
 
