@@ -55,4 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['customer'] = 'customer/product';
 $route['customer/product'] = 'customer/product';
+$route['customer/product/(:num)'] = 'customer/product/detail/$1';
+$route['customer/order'] = 'customer/order';
 $route['customer/basket'] = 'customer/basket';

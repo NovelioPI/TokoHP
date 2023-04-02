@@ -5,10 +5,16 @@ class Basket extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('m_order');
     }
 
     public function index()
     {
-        return $this->load->view('customer/basket');
+        $userId = $this->session->userdata('id');
+
+        $data['title'] = 'Keranjang';
+        $data['orders'] = $this->m_order->get_order_buyer($userId);
+
+        return $this->load->view('customer/basket', $data);
     }
 }
