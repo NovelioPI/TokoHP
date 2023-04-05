@@ -24,6 +24,11 @@ class M_order extends CI_Model
         $this->db->insert('order_product', $data);
     }
 
+    public function update_order($data, $condition)
+    {
+        $this->db->update('order_product', $data, $condition);
+    }
+    
     public function delete_order($data)
     {
         $this->db->delete('order_product', $data);
