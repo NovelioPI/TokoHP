@@ -33,7 +33,12 @@
                                         <h6 class="mt-2">Harga : <?= $product['price'] ?></h6>
                                         <h6 class="mt-2">Penjual : <?= $product['admin_name'] ?></h6>
                                         <input type="hidden" name="product" value="<?= $product['id'] ?>">
-                                        <?php if ($alreadyOrder) : ?>
+                                        <?php if (isset($alreadyCheckout)) : ?>
+                                            <div class="btn btn-info">
+                                                <i class="fas fa-info-circle"></i>
+                                                <p class="d-inline">Menunggu Konfirmasi</p>
+                                            </div>
+                                        <?php elseif ($alreadyOrder) : ?>
                                             <button type="submit" class="btn btn-danger btn-icon-split" name="order" value="delete">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>

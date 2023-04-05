@@ -24,9 +24,15 @@ class Product extends CI_Controller
 
         $userId = $this->session->userdata('id');
         $order = $this->m_order->get_order_detail($id, $userId);
-
-        isset($order) ? $data['alreadyOrder'] = true : $data['alreadyOrder'] = false;
-
+        
+        if (isset($order)) {
+            $data['alreadyOrder'] = true;
+            if ($order['status'] == 1) {
+                $data['alreadyCheckout'] = true;
+            }
+        } else {
+            $data['alreadyOrder'] = false;
+        }
         return $this->load->view('customer/product_detail', $data);
     }
 }
