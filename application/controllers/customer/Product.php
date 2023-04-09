@@ -7,6 +7,7 @@ class Product extends CI_Controller
         parent::__construct();
         $this->load->model('m_product');
         $this->load->model('m_order');
+        $this->load->model('M_checkouts');
     }
 
     public function index()
@@ -24,15 +25,10 @@ class Product extends CI_Controller
 
         $userId = $this->session->userdata('id');
         $order = $this->m_order->get_order_detail($id, $userId);
-        
-        if (isset($order)) {
-            $data['alreadyOrder'] = true;
-            if ($order['status'] == 1) {
-                $data['alreadyCheckout'] = true;
-            }
-        } else {
-            $data['alreadyOrder'] = false;
-        }
+        $checkout = $this->M_checkouts->getBuyerCheckout($userId, $id);
+
+        isset($order) ? $data['alreadyOrder'] = true : $data['alreadyOrder'] = false;
+        if (isset($checkout)) $data['alreadyCheckout'] = true;
         return $this->load->view('customer/product_detail', $data);
     }
 }

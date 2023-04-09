@@ -19,7 +19,7 @@
                 <div class="container-fluid">
                     <h1 class="h3 mb-4 text-gray-800">Keranjang</h1>
                     <!-- Basket List -->
-                    <form id="checkoutForm" method="post" action="<?= base_url('customer/order') ?>">
+                    <form id="checkoutForm" method="post" action="<?= base_url('customer/checkout') ?>">
                     <div class="row">
                         <?php foreach ($orders as $order) : ?>
                             <div class="col-lg-4">
@@ -56,6 +56,34 @@
                     </div>
                     </form>
                     <button type="submit" form="checkoutForm" class="btn btn-success mr-auto" name="order" value="checkout" disabled>Check Out</button>
+                    <?php if (isset($checkouts)) : ?>
+                    <h1 class="h3 mb-4 text-gray-800 mt-4">Checkout</h1>
+                    <div class="row mt-4">
+                        <?php foreach ($checkouts as $checkout) : ?>
+                            <div class="col-lg-4">
+                                <!-- Basic Card Example -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <a href="<?= base_url('customer/product/' . $checkout['id']) ?>">
+                                            <h6 class="m-0 font-weight-bold text-primary"><?= $checkout['product_name'] ?></h6>
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <img src="<?= base_url('uploads/product/' . $checkout['image']) ?>" class="w-100" />
+                                        <h6 class="mt-2">Harga : <?= $checkout['price'] ?></h6>
+                                        <h6 class="mt-2">Penjual : <?= $checkout['admin_name'] ?></h6>
+                                        <?php if ($checkout['admin_confirmation'] == 0 && $checkout['user_confirmation'] == 0) : ?>
+                                            <div class="btn btn-info">
+                                                <i class="fas fa-info-circle"></i>
+                                                <p class="d-inline">Menunggu Konfirmasi</p>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php endif; ?>
                 </div>
 
             </div>
